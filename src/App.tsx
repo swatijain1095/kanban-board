@@ -1,6 +1,9 @@
 import { useState } from "react";
-import { Column } from "./components/column/column";
-import { Column as IColumn } from "./types";
+import Column from "./components/Column";
+import { IColumn } from "./types";
+import { DndContext, DragEndEvent } from "@dnd-kit/core";
+import { Draggable } from "./components/DnD/Draggable";
+import { Droppable } from "./components/DnD/Droppable";
 
 const initialState: IColumn[] = [
   {
@@ -8,7 +11,7 @@ const initialState: IColumn[] = [
     name: "Todo",
     tasks: [
       {
-        id: 0,
+        id: "task1",
         title: "task1",
         description: "this is task 1",
       },
@@ -19,9 +22,14 @@ const initialState: IColumn[] = [
     name: "In Progress",
     tasks: [
       {
-        id: 1,
+        id: "task2",
         title: "task2",
         description: "this is task 2",
+      },
+      {
+        id: "task4",
+        title: "task4",
+        description: "this is task 4",
       },
     ],
   },
@@ -30,7 +38,7 @@ const initialState: IColumn[] = [
     name: "Done",
     tasks: [
       {
-        id: 2,
+        id: "task3",
         title: "task3",
         description: "this is task 3",
       },
@@ -40,11 +48,22 @@ const initialState: IColumn[] = [
 
 function App() {
   const [columns, setColumns] = useState(initialState);
+
+  const [isDropped, setIsDropped] = useState(false);
+  const draggableMarkup = <Draggable>Drag me</Draggable>;
+
+  function handleDragEnd(event: DragEndEvent) {
+    console.log(event);
+  }
+
   return (
-    <div>
-      Kanban Board
-      <Column />
-    </div>
+    <DndContext onDragEnd={handleDragEnd}>
+      <div className="flex flex-row">
+        {columns.map((item) => {
+          return <Column {...item} key={item.id} />;
+        })}
+      </div>
+    </DndContext>
   );
 }
 

@@ -1,11 +1,11 @@
-export type Task = {
-  id: number;
+export interface ITask {
+  id: string;
   title: string;
   description: string;
-};
+}
 
-export type Column = {
+export interface IColumn {
   id: string;
   name: string;
-  tasks: Task[];
-};
+  tasks: ITask[];
+}

@@ -1,12 +1,17 @@
 import { useDroppable } from "@dnd-kit/core";
-import { IColumn } from "../../types";
+import { IColumn, ITask } from "../../types";
 import Task from "../Task";
 
-export function Column({ id, name, tasks }: IColumn) {
+interface ColumnProps extends IColumn {
+  tasks: ITask;
+}
+
+export function Column({ id, name, tasks }: ColumnProps) {
   const { setNodeRef } = useDroppable({
     id,
   });
 
+  //
   return (
     <div
       ref={setNodeRef}
@@ -15,9 +20,11 @@ export function Column({ id, name, tasks }: IColumn) {
       <div className="flex flex-col justify-between px-6 py-4">
         <div className="font-bold text-xl mb-2">{name}</div>
         <div className="m-2">
-          {tasks.map((task) => {
-            return <Task {...task} key={task.id} />;
-          })}
+          {Object.values(tasks)
+            .filter((task) => task.columnId === id)
+            .map((task) => (
+              <Task {...task} key={task.id} />
+            ))}
         </div>
       </div>
     </div>

@@ -2,8 +2,6 @@ import { useState } from "react";
 import Column from "./components/Column";
 import { IKanbanState } from "./types";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
-import { Draggable } from "./components/DnD/Draggable";
-import { Droppable } from "./components/DnD/Droppable";
 
 const initialState: IKanbanState = {
   tasks: {
@@ -44,11 +42,22 @@ function App() {
   const [tasksList, setTasksList] = useState(initialState.tasks);
   const [columns, setColumns] = useState(initialState.columns);
 
-  const [isDropped, setIsDropped] = useState(false);
-  const draggableMarkup = <Draggable>Drag me</Draggable>;
-
   function handleDragEnd(event: DragEndEvent) {
     console.log(event);
+    const {
+      over,
+      active: { id: taskId },
+    } = event;
+    over &&
+      setTasksList((prevState) => {
+        return {
+          ...prevState,
+          [taskId]: {
+            ...prevState[taskId],
+            columnId: over.id as string,
+          },
+        };
+      });
   }
 
   return (

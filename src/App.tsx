@@ -47,16 +47,7 @@ function App() {
       over,
       active: { id: taskId },
     } = event;
-    over &&
-      setTasksList((prevState) => {
-        return {
-          ...prevState,
-          [taskId]: {
-            ...prevState[taskId],
-            columnId: over.id as string,
-          },
-        };
-      });
+    over && editTask(taskId as string, { columnId: over.id as string });
   }
 
   function editTask(taskId: string, updates: Partial<ITask>) {
@@ -65,7 +56,7 @@ function App() {
         ...prevState,
         [taskId]: {
           ...prevState[taskId],
-          updates,
+          ...updates,
         },
       };
     });

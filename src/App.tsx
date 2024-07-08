@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Column from "./components/Column";
-import { IKanbanState } from "./types";
+import { IKanbanState, ITask } from "./types";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 
 const initialState: IKanbanState = {
@@ -59,6 +59,18 @@ function App() {
       });
   }
 
+  function editTask(taskId: string, updates: Partial<ITask>) {
+    setTasksList((prevState) => {
+      return {
+        ...prevState,
+        [taskId]: {
+          ...prevState[taskId],
+          updates,
+        },
+      };
+    });
+  }
+
   return (
     <DndContext onDragEnd={handleDragEnd}>
       <div className="flex flex-row justify-between gap-x-96">
@@ -71,7 +83,14 @@ function App() {
       </div>
       <div className="flex flex-col md:flex-row lg:max-w-screen-lg">
         {columns.map((item) => {
-          return <Column {...item} key={item.id} tasks={tasksList} />;
+          return (
+            <Column
+              {...item}
+              key={item.id}
+              tasks={tasksList}
+              editTask={editTask}
+            />
+          );
         })}
       </div>
     </DndContext>

@@ -4,9 +4,10 @@ import Task from "../Task";
 
 interface ColumnProps extends IColumn {
   tasks: ITask;
+  editTask: (id: string, updates: Partial<ITask>) => void;
 }
 
-export function Column({ id, name, color, tasks }: ColumnProps) {
+export function Column({ id, name, color, tasks, editTask }: ColumnProps) {
   const { setNodeRef } = useDroppable({
     id,
   });
@@ -33,7 +34,7 @@ export function Column({ id, name, color, tasks }: ColumnProps) {
           {Object.values(tasks)
             .filter((task) => task.columnId === id)
             .map((task) => (
-              <Task {...task} key={task.id} />
+              <Task {...task} key={task.id} editTask={editTask} />
             ))}
         </div>
       </div>

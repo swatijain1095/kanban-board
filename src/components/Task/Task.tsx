@@ -8,7 +8,7 @@ export const Task = ({ id, title, description }: ITask) => {
 
   const style = transform
     ? {
-        transform: `translate3d(${transform.x}px, ${transform.y}px, 100px)`,
+        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
       }
     : undefined;
 
@@ -19,17 +19,17 @@ export const Task = ({ id, title, description }: ITask) => {
         style={style}
         {...listeners}
         {...attributes}
-        className={`max-w-sm rounded overflow-hidden shadow-lg ${
+        className={`m-1 max-w-sm rounded-lg overflow-hidden bg-white drop-shadow-lg flex-grow w-full ${
           transform ? "absolute" : ""
         }`}
       >
         <div className="px-6 py-4">
-          <div className="font-bold text-xl mb-2">{title}</div>
-          <p className="text-gray-700 text-base">{description}</p>
+          <div className="font-semibold text-lg mb-2">{title}</div>
+          <p className="text-gray-700 text-sm font-normal">{description}</p>
         </div>
       </div>
       {transform && (
-        <div className="max-w-sm rounded overflow-hidden shadow-lg opacity-50">
+        <div className="m-1 rounded-lg overflow-hidden bg-white drop-shadow-lg flex-grow opacity-50 w-full">
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">{title}</div>
             <p className="text-gray-700 text-base">{description}</p>

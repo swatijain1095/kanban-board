@@ -31,9 +31,9 @@ const initialState: IKanbanState = {
     },
   },
   columns: [
-    { id: "todo", name: "Todo" },
-    { id: "inProgress", name: "In Progress" },
-    { id: "done", name: "Done" },
+    { id: "todo", name: "To do", color: "#136baa" },
+    { id: "inProgress", name: "In Progress", color: "#efaa13" },
+    { id: "done", name: "Done", color: "#13aa40" },
   ],
   columnOrder: ["todo", "inProgress", "done"],
 };
@@ -43,7 +43,6 @@ function App() {
   const [columns, setColumns] = useState(initialState.columns);
 
   function handleDragEnd(event: DragEndEvent) {
-    console.log(event);
     const {
       over,
       active: { id: taskId },
@@ -62,7 +61,7 @@ function App() {
 
   return (
     <DndContext onDragEnd={handleDragEnd}>
-      <div className="flex flex-row">
+      <div className="flex flex-col md:flex-row lg:max-w-screen-lg">
         {columns.map((item) => {
           return <Column {...item} key={item.id} tasks={tasksList} />;
         })}

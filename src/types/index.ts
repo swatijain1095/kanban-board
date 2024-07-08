@@ -8,6 +8,7 @@ export interface ITask {
 export interface IColumn {
   id: string;
   name: string;
+  color: string;
 }
 
 export interface IKanbanState {

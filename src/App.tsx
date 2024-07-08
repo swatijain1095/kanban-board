@@ -42,15 +42,15 @@ function App() {
   const [tasksList, setTasksList] = useState(initialState.tasks);
   const [columns, setColumns] = useState(initialState.columns);
 
-  function handleDragEnd(event: DragEndEvent) {
+  const handleDragEnd = (event: DragEndEvent) => {
     const {
       over,
       active: { id: taskId },
     } = event;
     over && editTask(taskId as string, { columnId: over.id as string });
-  }
+  };
 
-  function editTask(taskId: string, updates: Partial<ITask>) {
+  const editTask = (taskId: string, updates: Partial<ITask>) => {
     setTasksList((prevState) => {
       return {
         ...prevState,
@@ -60,7 +60,15 @@ function App() {
         },
       };
     });
-  }
+  };
+
+  const deleteTask = (id: string) => {
+    setTasksList((prevState) => {
+      const newTaskList = { ...prevState };
+      delete newTaskList[id];
+      return newTaskList;
+    });
+  };
 
   return (
     <DndContext onDragEnd={handleDragEnd}>
@@ -80,6 +88,7 @@ function App() {
               key={item.id}
               tasks={tasksList}
               editTask={editTask}
+              deleteTask={deleteTask}
             />
           );
         })}

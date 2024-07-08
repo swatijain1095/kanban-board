@@ -6,9 +6,16 @@ import { RxDragHandleHorizontal } from "react-icons/rx";
 
 interface TaskProps extends ITask {
   editTask: (id: string, updates: Partial<ITask>) => void;
+  deleteTask: (id: string) => void;
 }
 
-export const Task = ({ id, title, description, editTask }: TaskProps) => {
+export const Task = ({
+  id,
+  title,
+  description,
+  editTask,
+  deleteTask,
+}: TaskProps) => {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id,
   });
@@ -32,6 +39,10 @@ export const Task = ({ id, title, description, editTask }: TaskProps) => {
     }
   };
 
+  const handleDelete = () => {
+    deleteTask(id);
+  };
+
   return (
     <>
       <div
@@ -51,7 +62,9 @@ export const Task = ({ id, title, description, editTask }: TaskProps) => {
               onBlur={handleBlur}
             />
             <span className="cursor-grab">
-              <GoTrash size="1em" />
+              <button onClick={handleDelete}>
+                <GoTrash size="1em" />
+              </button>
               <RxDragHandleHorizontal
                 size="1em"
                 {...listeners}

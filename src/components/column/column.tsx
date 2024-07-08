@@ -19,7 +19,6 @@ export function Column({ id, name, color, tasks }: ColumnProps) {
       <div className="flex flex-col justify-between px-6 py-4">
         <div className="flex flex-row justify-between items-center md:shrink-0 ">
           <div className="font-bold text-xl mb-2 text-slate-800">{name}</div>
-          <button>+</button>
         </div>
         <hr
           style={{
@@ -29,6 +28,7 @@ export function Column({ id, name, color, tasks }: ColumnProps) {
               "drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
           }}
         />
+
         <div className="m-2 flex flex-col items-center">
           {Object.values(tasks)
             .filter((task) => task.columnId === id)

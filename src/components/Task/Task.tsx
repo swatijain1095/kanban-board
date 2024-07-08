@@ -1,5 +1,6 @@
 import { ITask } from "../../types";
 import { useDraggable } from "@dnd-kit/core";
+import { GoTrash } from "react-icons/go";
 
 export const Task = ({ id, title, description }: ITask) => {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -24,7 +25,12 @@ export const Task = ({ id, title, description }: ITask) => {
         }`}
       >
         <div className="px-6 py-4">
-          <div className="font-semibold text-lg mb-2">{title}</div>
+          <div className="flex flex-row items-center justify-between">
+            <div className="font-semibold text-lg mb-2">{title}</div>
+            <span>
+              <GoTrash size="1em" />
+            </span>
+          </div>
           <p className="text-gray-700 text-sm font-normal">{description}</p>
         </div>
       </div>

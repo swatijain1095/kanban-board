@@ -2,7 +2,7 @@ import { ITask } from "../../types";
 import { useDraggable } from "@dnd-kit/core";
 import { useState } from "react";
 import { GoTrash } from "react-icons/go";
-import { RxDragHandleHorizontal } from "react-icons/rx";
+import { RiDragMove2Fill } from "react-icons/ri";
 
 interface TaskProps extends ITask {
   editTask: (id: string, updates: Partial<ITask>) => void;
@@ -52,8 +52,8 @@ export const Task = ({
           transform ? "absolute" : ""
         }`}
       >
-        <div className="px-6 py-4">
-          <div className="flex flex-row items-center justify-between">
+        <div className="px-4 py-2 flex flex-row items-start justify-between">
+          <div>
             <input
               className="w-full h-[90%] resize-none font-semibold text-lg mb-2 outline-none"
               type="text"
@@ -62,25 +62,26 @@ export const Task = ({
               onChange={(e) => setNewTitle(e.target.value)}
               onBlur={handleBlur}
             />
-            <span className="cursor-grab">
-              <button onClick={handleDelete}>
-                <GoTrash size="1em" />
-              </button>
-              <RxDragHandleHorizontal
-                size="1em"
-                {...listeners}
-                {...attributes}
-              />
-            </span>
-          </div>
 
-          <textarea
-            className="w-full resize-none text-gray-700 text-sm font-normal outline-none"
-            value={newDescription}
-            placeholder={!description ? "Add Description here" : ""}
-            onChange={(e) => setNewDescription(e.target.value)}
-            onBlur={handleBlur}
-          />
+            <textarea
+              className="w-full resize-none text-gray-700 text-sm font-normal outline-none"
+              value={newDescription}
+              placeholder={!description ? "Add Description here" : ""}
+              onChange={(e) => setNewDescription(e.target.value)}
+              onBlur={handleBlur}
+            />
+          </div>
+          <div className="flex flex-col gap-3 pt-1 justify-between items-center">
+            <RiDragMove2Fill
+              className="cursor-grab"
+              size="1em"
+              {...listeners}
+              {...attributes}
+            />
+            <button onClick={handleDelete}>
+              <GoTrash size="1em" />
+            </button>
+          </div>
         </div>
       </div>
       {transform && (

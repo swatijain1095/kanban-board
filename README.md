@@ -1,3 +1,19 @@
+# Kanban Board
+Kanban Board allows you to drag and drop tasks between columns. It is built using:
+
+-  React
+-  DnD-Kit
+-  TypeScript
+-  Tailwind CSS
+-  React Icons (for the icons)
+
+# 👾  Features
+
+-  Edit item names.
+-  Drag and drop items between columns.
+-  Add items (draggable).
+-  Delete items from columns.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

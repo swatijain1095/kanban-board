@@ -55,8 +55,9 @@ export const Task = ({
         <div className="px-6 py-4">
           <div className="flex flex-row items-center justify-between">
             <input
-              className="w-full h-[90%] resize-none font-semibold text-lg mb-2"
+              className="w-full h-[90%] resize-none font-semibold text-lg mb-2 outline-none"
               type="text"
+              placeholder={!title ? "Add Title here" : ""}
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
               onBlur={handleBlur}
@@ -74,8 +75,9 @@ export const Task = ({
           </div>
 
           <textarea
-            className="w-full resize-none text-gray-700 text-sm font-normal"
+            className="w-full resize-none text-gray-700 text-sm font-normal outline-none"
             value={newDescription}
+            placeholder={!description ? "Add Description here" : ""}
             onChange={(e) => setNewDescription(e.target.value)}
             onBlur={handleBlur}
           />

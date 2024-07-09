@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import Column from "./components/Column";
 import { IKanbanState, ITask } from "./types";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
@@ -70,13 +71,30 @@ function App() {
     });
   };
 
+  const addNewTask = () => {
+    const newTaskId = uuidv4();
+    const newTaskList = {
+      ...tasksList,
+      [newTaskId]: {
+        id: newTaskId,
+        title: "",
+        description: "",
+        columnId: "todo",
+      },
+    };
+    setTasksList(newTaskList);
+  };
+
   return (
     <DndContext onDragEnd={handleDragEnd}>
       <div className="flex flex-row justify-between gap-x-96">
         <h1 className="text-gray-800 text-xl md:text-3xl font-bold">
           Kanban Board
         </h1>
-        <button className="flex bg-indigo-500 text-white hover:bg-indigo-600 items-center justify-center rounded-xl md:rounded-md text-xs font-bold md:text-sm md:font-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 py-2 px-3 md:px-3 md:py-1">
+        <button
+          onClick={addNewTask}
+          className="flex bg-indigo-500 text-white hover:bg-indigo-600 items-center justify-center rounded-xl md:rounded-md text-xs font-bold md:text-sm md:font-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 py-2 px-3 md:px-3 md:py-1"
+        >
           Add new task
         </button>
       </div>

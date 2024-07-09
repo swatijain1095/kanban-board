@@ -3,7 +3,7 @@ import { IColumn, ITask } from "../../types";
 import Task from "../Task";
 
 interface ColumnProps extends IColumn {
-  tasks: ITask;
+  tasks: { [key: string]: ITask };
   editTask: (id: string, updates: Partial<ITask>) => void;
   deleteTask: (id: string) => void;
 }

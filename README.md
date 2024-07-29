@@ -1,6 +1,7 @@
 # Kanban Board
 Kanban Board allows you to drag and drop tasks between columns. It is built using:
 
+# Technologies Used
 -  React
 -  DnD-Kit
 -  TypeScript
@@ -13,6 +14,10 @@ Kanban Board allows you to drag and drop tasks between columns. It is built usin
 -  Drag and drop items between columns.
 -  Add items (draggable).
 -  Delete items from columns.
+
+# Preview
+  ![IntroImg](https://github.com/user-attachments/assets/ff2caddc-6d0b-44e1-aa12-854b7a147e8e)
+
 
 # React + TypeScript + Vite
 
